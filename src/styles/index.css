@@ -1,0 +1,303 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem; /* Ensure anchors account for fixed header */
+  }
+
+  body {
+    @apply font-sans text-gray-800 antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  /* Fix image display in hero section */
+  .hero-image img {
+    @apply w-full h-full object-cover;
+  }
+}
+
+/* Z-index Management */
+@layer utilities {
+  .z-nav {
+    z-index: 50;
+  }
+  .z-modal {
+    z-index: 60;
+  }
+  .z-tooltip {
+    z-index: 40;
+  }
+  .z-content {
+    z-index: 10;
+  }
+  .z-backdrop {
+    z-index: 0;
+  }
+}
+
+/* Section Spacing & Layout Fixes */
+@layer components {
+  /* Fix content flow and prevent overlapping */
+  section {
+    @apply relative z-content;
+    position: relative;
+  }
+  
+  /* Hero section specific */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  #hero .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  #hero .hero-content {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Menu section specific */
+  #menu {
+    padding-top: 4rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Contact section specific */
+  #contact {
+    position: relative;
+    z-index: 10;
+  }
+
+  .btn-primary {
+    @apply bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-300;
+  }
+
+  .btn-outline {
+    @apply border-2 border-amber-500 hover:bg-amber-500 text-amber-500 hover:text-white font-semibold py-2 px-6 rounded-lg transition duration-300;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-shadow-sm {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Navbar Responsive Behavior */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Make the mobile menu behave correctly */
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.mobile-menu.open {
+  max-height: 300px; /* Adjust based on content */
+}
+
+/* Responsive Image Handling */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Menu Item Card Hover Effects */
+.menu-item-card {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.menu-item-card:hover {
+  @apply transform -translate-y-1 shadow-lg;
+}
+
+/* Form Input Styles */
+.form-input {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition duration-200;
+}
+
+.form-label {
+  @apply block text-gray-700 text-sm font-medium mb-2;
+}
+
+/* Hero Section Background Overlay */
+.hero-overlay {
+  @apply absolute inset-0 bg-black bg-opacity-50;
+}
+
+/* Navigation Menu Transition */
+.nav-menu {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-amber-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-amber-600;
+}
+
+/* Loading Spinner Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  @apply w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full;
+  animation: spin 1s linear infinite;
+}
+
+/* Typography Enhancements */
+.heading-primary {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900;
+}
+
+.heading-secondary {
+  @apply text-3xl md:text-4xl font-bold text-gray-800;
+}
+
+.text-body {
+  @apply text-base text-gray-600 leading-relaxed;
+}
+
+/* Focus Styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2;
+}
+
+/* Toast Notification Styles */
+.toast {
+  @apply fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg;
+}
+
+.toast-success {
+  @apply bg-green-500 text-white;
+}
+
+.toast-error {
+  @apply bg-red-500 text-white;
+}
+
+/* Grid Layout Utilities */
+.grid-auto-fit {
+  @apply grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Responsive Images */
+.img-fluid {
+  @apply w-full h-full object-cover;
+}
+
+/* Section Transitions */
+.section-transition {
+  @apply transition-all duration-500 ease-in-out;
+}
+
+/* Card Shadows */
+.card-shadow {
+  @apply shadow-md hover:shadow-xl transition-shadow duration-300;
+}
+
+/* Fix image container in hero for proper aspect ratio */
+.hero-image-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ensure proper spacing between sections */
+section + section {
+  margin-top: 2rem;
+}
